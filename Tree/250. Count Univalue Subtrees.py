@@ -1,6 +1,9 @@
 # Given the root of a binary tree, return the number of uni-value subtrees.
 # A uni-value subtree means all nodes of the subtree have the same value.
 
+# traverse down the tree
+# check the left and right subtree
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -12,10 +15,12 @@ def countUnivalSubtrees(root):
     def check(root):
         nonlocal ans
         if root is None:
-            return
+            return None
+        # reach to leaf node
         if not root.left and not root.right:
             ans += 1
             return root.val
+        # check both left and right subtree
         if root.left and root.right:
             left = check(root.left)
             right = check(root.right)
@@ -23,12 +28,14 @@ def countUnivalSubtrees(root):
                 ans += 1
                 return left
             return None
+        # only left subtree
         if root.left:
             left = check(root.left)
             if left == root.val:
                 ans += 1
                 return left
             return None
+        # only right subtree
         if root.right:
             right = check(root.right)
             if right == root.val:
@@ -68,7 +75,7 @@ if __name__ == '__main__':
     countUnivalSubtrees(root)
     assert countUnivalSubtrees(root) == 6
 
-
+# solution from LC
 class Solution(object):
     def countUnivalSubtrees(self, root):
         """
