@@ -18,16 +18,15 @@ def levelOrder(root):
     ans = []
     quene = [root]
     while quene:
-        temp_quene = []
         temp_ans = []
-        while quene:
+        num2pop = len(quene)
+        for _ in range(num2pop):
             cur = quene.pop(0)
             temp_ans.append(cur.val)
             if cur.left:
-                temp_quene.append(cur.left)
+                quene.append(cur.left)
             if cur.right:
-                temp_quene.append(cur.right)
-        quene = temp_quene
+                quene.append(cur.right)
         ans.append(temp_ans)
     return ans
 
