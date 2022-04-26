@@ -8,6 +8,8 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+# BFS
+# pop nodes and add nodes from the subtree level by level from left to right
 def levelOrder(root):
     """
     :type root: TreeNode
@@ -16,17 +18,17 @@ def levelOrder(root):
     if root is None:
         return []
     ans = []
-    quene = [root]
-    while quene:
+    queue = [root]
+    while queue:
         temp_ans = []
-        num2pop = len(quene)
+        num2pop = len(queue)
         for _ in range(num2pop):
-            cur = quene.pop(0)
+            cur = queue.pop(0)
             temp_ans.append(cur.val)
             if cur.left:
-                quene.append(cur.left)
+                queue.append(cur.left)
             if cur.right:
-                quene.append(cur.right)
+                queue.append(cur.right)
         ans.append(temp_ans)
     return ans
 
@@ -34,7 +36,7 @@ if __name__ == '__main__':
     root = TreeNode(3)
     root.left = TreeNode(9)
     root.right = TreeNode(20)
-    root.right.left = TreeNode(20)
-    root.right.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
     print(levelOrder(root))
-    assert levelOrder(root) == [[3], [9, 20], [20, 20]]
+    assert levelOrder(root) == [[3],[9,20],[15,7]]
