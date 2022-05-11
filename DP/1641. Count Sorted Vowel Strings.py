@@ -4,6 +4,7 @@
 # s[i] is the same as or comes before s[i+1] in the alphabet.
 
 # non-DP version
+# expand list level by level into final count
 def countVowelStrings(n: int) -> int:
     if n == 1:
         return 5
@@ -26,6 +27,24 @@ def countVowelStrings(n: int) -> int:
         cur = temp
     return sum(cur)
 
+def countVowelStrings_dp(n: int) -> int:
+    dp = {(2,'a'):5, (2,'e'):4, (2,'i'):3, (2,'o'):2, (2,'u'):1}
+    def count(n, last_char):
+        if n == 1:
+            return 1
+        if (n, last_char) in dp:
+            return dp[(n, last_char)]
+        ans = 0
+        vowels = ['a', 'e', 'i', 'o', 'u']
+        for vowel in vowels:
+            if vowel >= last_char:
+                ans += count(n-1, vowel)
+        dp[(n, last_char)] = ans
+        return dp[(n, last_char)]
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    return sum([count(n, vowel) for vowel in vowels])
+
+
 if __name__ == '__main__':
     n = 1
     assert countVowelStrings(n) == 5
@@ -34,3 +53,11 @@ if __name__ == '__main__':
     n = 33
     assert countVowelStrings(n) == 66045
     print(countVowelStrings(n))
+    n = 1
+    print(countVowelStrings_dp(n))
+    assert countVowelStrings_dp(n) == 5
+    n = 2
+    assert countVowelStrings_dp(n) == 15
+    n = 33
+    assert countVowelStrings_dp(n) == 66045
+    print(countVowelStrings_dp(n))
