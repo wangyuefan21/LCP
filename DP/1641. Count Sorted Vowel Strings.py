@@ -51,13 +51,13 @@ if __name__ == '__main__':
     n = 2
     assert countVowelStrings(n) == 15
     n = 33
-    assert countVowelStrings(n) == 66045
     print(countVowelStrings(n))
+    assert countVowelStrings(n) == 66045
     n = 1
     print(countVowelStrings_dp(n))
     assert countVowelStrings_dp(n) == 5
     n = 2
     assert countVowelStrings_dp(n) == 15
     n = 33
-    assert countVowelStrings_dp(n) == 66045
     print(countVowelStrings_dp(n))
+    assert countVowelStrings_dp(n) == 66045
